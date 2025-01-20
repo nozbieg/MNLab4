@@ -8,25 +8,12 @@ using System.Linq;
 namespace MNLab4;
 public class RungeKuttaSolver
 {
-    public static double F1(double x, double y, double a, double b)
-    {
-        return a * x + b * y;
-    }
+    public static double F1(double x, double y, double a, double b) =>  a* x + b* y;
+    public static double F2(double x, double y, double a, double b) => a * x - b * y;
 
-    public static double F2(double x, double y, double a, double b)
-    {
-        return a * x - b * y;
-    }
+    public static double F3(double x, double y, double a, double b) => a * x * b * y;
 
-    public static double F3(double x, double y, double a, double b)
-    {
-        return a * x * b * y;
-    }
-
-    public static double F4(double x, double y, double a, double b)
-    {
-        return y != 0 ? (a * x) / (b * y) : 0;
-    }
+    public static double F4(double x, double y, double a, double b) =>  y != 0 ? (a * x) / (b * y) : 0;
 
     public static (List<double> xVals, List<double> yVals) RungeKutta3(double x0, double y0, double h, int n, Func<double, double, double, double, double> F, double a, double b)
     {
@@ -45,10 +32,8 @@ public class RungeKuttaSolver
             xVals.Add(xiPlus1);
             yVals.Add(yiPlus1);
         }
-
         return (xVals, yVals);
     }
-
     public static (List<double> xVals, List<double> yVals) RungeKutta4(double x0, double y0, double h, int n, Func<double, double, double, double, double> F, double a, double b)
     {
         var xVals = new List<double> { x0 };
@@ -67,7 +52,6 @@ public class RungeKuttaSolver
             xVals.Add(xiPlus1);
             yVals.Add(yiPlus1);
         }
-
         return (xVals, yVals);
     }
 
@@ -95,7 +79,7 @@ public class RungeKuttaSolver
 
         using (var stream = new System.IO.FileStream($"{methodName}.png", System.IO.FileMode.Create))
         {
-            PngExporter.Export(plotModel, stream,800,600);
+            PngExporter.Export(plotModel, stream, 800, 600);
         }
 
         Console.WriteLine($"Wykres zapisany jako {methodName}.png");
